@@ -1,4 +1,5 @@
 The code in this repo scrapes walk highlands to find the best walks for a given set of users in a given set of regions to maximise munros bagged and emjoyment had.
+The code quality is abysmal, please don't judge.
 
 Needs python3 and pip3
 
