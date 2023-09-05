@@ -189,7 +189,7 @@ def generate_walk_list(user_names, regions_to_include):
 		walk_string += f"Munros Included: {walk['munros_in_walk']} " + "\n"
 		walk_string += f"Average Munro Rating: {walk['avg_munro_rating']}" + "\n"
 		walk_string += f"Average number of new munros per user: {walk['avg_num_users_not_done']} " + "\n"
-		walk_string += f"Walk score (rating * square root(avg new munros): {walk['score']} " + "\n"
+		walk_string += f"Walk score (rating * square root(avg new munros)): {walk['score']} " + "\n"
 		walk_string += "\n"
 	
 		
