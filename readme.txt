@@ -3,9 +3,9 @@ The code quality is abysmal, please don't judge.
 
 Walks are scored as average munro rating * average number of new munros per user. If you wish to change this scoring system change 
 ``` 
-				avg_rating = total_rating / len(walk_data["munros"])
-				avg_num_users_not_done = total_num_users_not_done / (num_users)
-				walk_score = avg_rating * avg_num_users_not_done
+avg_rating = total_rating / len(walk_data["munros"])
+avg_num_users_not_done = total_num_users_not_done / (num_users)
+walk_score = avg_rating * avg_num_users_not_done
 ```
 in generate_walk_list()
 
