@@ -168,7 +168,7 @@ def generate_walk_list(user_names, regions_to_include):
 				avg_num_users_not_done = total_num_users_not_done / (num_users)
 				walk_score = avg_rating * avg_num_users_not_done
 				munros_in_walk = ", ".join(walk_data["munros"])
-				walk_link = f"https://www.walkhighlands.co.uk/{walk_data['link']}"
+				walk_link = f"https://www.walkhighlands.co.uk{walk_data['link']}"
     
 				walk_info = {
 					"name" : walk_name, 
