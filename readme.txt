@@ -12,7 +12,7 @@ in generate_walk_list()
 
 Needs python3 and pip3
 
-In command line run `pip3 install requirements.txt` to install libs
+In command line run `pip3 install -r requirements.txt` to install libs
 
 Add user names to query to `user_names.txt`, one per line 
 
