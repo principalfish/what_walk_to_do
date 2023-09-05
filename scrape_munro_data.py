@@ -54,7 +54,6 @@ def get_munro_data(link, name, region, height):
 
 
 def fetch_munros():
-
     munros_url = "https://www.walkhighlands.co.uk/munros/munros-a-z"
 
     response = requests.get(munros_url)

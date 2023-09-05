@@ -178,7 +178,6 @@ def generate_walk_list(user_names, regions_to_include):
 					"avg_num_users_not_done" : round(avg_num_users_not_done, 2),
 					"score" : round(walk_score, 2)
 				}
-
 				walks_to_do_info.append(walk_info)
     
 	walk_string = "Suggested walks in order of best match for given users: \n\n"
