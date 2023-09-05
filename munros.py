@@ -167,7 +167,7 @@ def generate_walk_list(user_names, regions_to_include):
 
 				avg_rating = total_rating / len(walk_data["munros"])
 				avg_num_users_not_done = total_num_users_not_done / (num_users)
-				walk_score = avg_rating * math.sqrt(avg_num_users_not_done)
+				walk_score = math.pow(avg_rating, 2) * math.sqrt(avg_num_users_not_done)
 				munros_in_walk = ", ".join(walk_data["munros"])
 				walk_link = f"https://www.walkhighlands.co.uk{walk_data['link']}"
     
@@ -189,7 +189,7 @@ def generate_walk_list(user_names, regions_to_include):
 		walk_string += f"Munros Included: {walk['munros_in_walk']} " + "\n"
 		walk_string += f"Average Munro Rating: {walk['avg_munro_rating']}" + "\n"
 		walk_string += f"Average number of new munros per user: {walk['avg_num_users_not_done']} " + "\n"
-		walk_string += f"Walk score (rating * square root(avg new munros)): {walk['score']} " + "\n"
+		walk_string += f"Walk score (rating^2 * square root(avg new munros)): {walk['score']} " + "\n"
 		walk_string += "\n"
 	
 		
