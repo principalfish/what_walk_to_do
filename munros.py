@@ -108,9 +108,9 @@ def generate_walk_list(user_names, regions_to_include):
 	for user in user_names:
 		munros_outstanding = get_users_outstanding_munros(user, munros_to_include)
 		munros_outstanding_map[user] = munros_outstanding
-		user_string = f"User {user} has {len(munros_outstanding)} munros remaining"
-		users_info_string = user_string + "\n"
-		print (users_info_string)
+		user_string = f"User {user} has {len(munros_outstanding)} munros remaining in given regions"
+		users_info_string += user_string + "\n"
+		print (user_string)
 	
 	munro_frequency_map = generate_outstanding_munro_frequency_map(munros_outstanding_map)
 	num_users = len(user_names)

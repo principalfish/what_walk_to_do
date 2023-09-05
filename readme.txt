@@ -14,6 +14,8 @@ Some data is output to terminal. The useful info on munros / walks is dumped int
 To update munro_data.json run python3 scrape_munro_data.py 
 This may take some time and there shouldn't really be much reason to do this.
 
+The code has no error handling, no test and may get you rate limited on walk highlands. Use at your own peril
+
 Full list of possible regions 
 Angus
 Argyll
