@@ -1,17 +1,19 @@
 Needs python3 and pip3
-pip3 install requirements.txt
 
-Add user names to query to user_names.txt, one per line 
+In command line run `pip3 install requirements.txt` to install libs
 
-Add regions to include to regions_to_include
+Add user names to query to `user_names.txt`, one per line 
+
+Add regions to include to `regions_to_include.txt`
 Regions are walk highlands regions, full list at bottom of this doc.
 
 To run script
-python3 munros.py
+`python3 munros.py`
+in the directory of the repository.
 
-Some data is output to terminal. The useful info on munros / walks is dumped into output.txt
+Some data is output to terminal. The useful info on munros / walks is written into `output.txt`
 
-To update munro_data.json run python3 scrape_munro_data.py 
+To update `munro_data.json` run `python3 scrape_munro_data.py`
 This may take some time and there shouldn't really be much reason to do this.
 
 The code has no error handling, no test and may get you rate limited on walk highlands. Use at your own peril
