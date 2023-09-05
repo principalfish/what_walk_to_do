@@ -1,7 +1,7 @@
 The code in this repo scrapes walk highlands to find the best walks for a given set of users in a given set of regions to maximise munros bagged and emjoyment had.
 The code quality is abysmal, please don't judge.
 
-Walks are scored as average munro rating * average number of new munros per user. If you wish to change this scoring system change 
+Walks are scored as average munro rating (walk highlands) * average number of new munros per user. If you wish to change this scoring system change 
 ``` 
 avg_rating = total_rating / len(walk_data["munros"])
 avg_num_users_not_done = total_num_users_not_done / (num_users)
@@ -27,7 +27,7 @@ Some data is output to terminal. The useful info on munros / walks is written in
 To update `munro_data.json` run `python3 scrape_munro_data.py`
 This may take some time and there shouldn't really be much reason to do this.
 
-The code has no error handling, no test and may get you rate limited on walk highlands. Use at your own peril
+The code has no error handling, no tests and may get you rate limited on walk highlands. Use at your own peril
 
 Full list of possible regions 
 Angus
