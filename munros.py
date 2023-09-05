@@ -104,16 +104,19 @@ def generate_walk_list(user_names, regions_to_include):
 	munros_to_include = get_munros_to_include(munros_data, regions_to_include)
 		
 	munros_outstanding_map = {}
+	users_info_string = ""
 	for user in user_names:
 		munros_outstanding = get_users_outstanding_munros(user, munros_to_include)
 		munros_outstanding_map[user] = munros_outstanding
-		print (f"User {user} has {len(munros_outstanding)} munros remaining")
+		user_string = f"User {user} has {len(munros_outstanding)} munros remaining"
+		users_info_string = user_string + "\n"
+		print (users_info_string)
 	
 	munro_frequency_map = generate_outstanding_munro_frequency_map(munros_outstanding_map)
 	num_users = len(user_names)
 
 	frequencies_to_check = []
-	munro_freq_mapping = {}
+	munro_freq_mapping = {key:0 for key in munros_data}
  	
 	print ("Generating outstanding munro list")
 	munro_output_string = ""
@@ -133,9 +136,10 @@ def generate_walk_list(user_names, regions_to_include):
 			if i == num_users:
 				print (f"All users have not the following munros: {','.join(munros_all_users)}")
 		
-	
 	print ("Generating best walk list")
-	walk_string = ""
+	
+	walks_to_do_info = []
+	walks_parsed = {}
 	for f in frequencies_to_check:	
      
 		munros_to_check = munro_frequency_map[f]
@@ -147,23 +151,49 @@ def generate_walk_list(user_names, regions_to_include):
 			walks_to_munro = current_munro_data["walks"]
 
 			for walk_to_munro in walks_to_munro:
-				walk_name = walk_to_munro["walk"]
-				print (walk_name)
-				walk_data = walks_data[walk_name]
-				print (walk_data)
+				walk_name = walk_to_munro["walk"]	
+
+				if walk_name in walks_parsed:
+					continue
+				
+				walks_parsed[walk_name] = True
+				walk_data = walks_data[walk_name]				
 				total_rating = 0
 				total_num_users_not_done = 0
 				for munro_in_walk in walk_data["munros"]:
-					total_rating += current_munro_data[munro_in_walk]["rating"]
+					total_rating += float(munros_data[munro_in_walk]["rating"])
 					total_num_users_not_done += munro_freq_mapping[munro_in_walk]
 
 				avg_rating = total_rating / len(walk_data["munros"])
-				avg_num_users_not_done = total_num_users_not_done / len(walk_data["munros"])
-				score = avg_rating * avg_num_users_not_done
-				print (avg_rating, avg_num_users_not_done, score)
-				
+				avg_num_users_not_done = total_num_users_not_done / (num_users)
+				walk_score = avg_rating * avg_num_users_not_done
+				munros_in_walk = ", ".join(walk_data["munros"])
+				walk_link = f"https://www.walkhighlands.co.uk/{walk_data['link']}"
     
-	output_string = munro_output_string + "\n" + walk_string
+				walk_info = {
+					"name" : walk_name, 
+					"link" : walk_link,
+					"munros_in_walk" : munros_in_walk,
+					"avg_munro_rating": round(avg_rating, 2),
+					"avg_num_users_not_done" : round(avg_num_users_not_done, 2),
+					"score" : round(walk_score, 2)
+				}
+
+				walks_to_do_info.append(walk_info)
+    
+	walk_string = "Suggested walks in order of best match for given users: \n\n"
+	walks_sorted = sorted(walks_to_do_info, key=lambda x: x['score'], reverse=True) 
+	for walk in walks_sorted:
+		walk_string += f"Walk: {walk['name']} " + "\n"
+		walk_string += f"Link: {walk['link']} " + "\n"
+		walk_string += f"Munros Included: {walk['munros_in_walk']} " + "\n"
+		walk_string += f"Average Munro Rating: {walk['avg_munro_rating']}" + "\n"
+		walk_string += f"Average number of new munros per user: {walk['avg_num_users_not_done']} " + "\n"
+		walk_string += f"Walk score (rating * new munros): {walk['score']} " + "\n"
+		walk_string += "\n"
+	
+		
+	output_string = "For users:" + ",".join(user_names) + "\n" + "In regions:" + ",".join(regions_to_include) +  "\n\n" + users_info_string + "\n\n" + munro_output_string + "\n\n" + walk_string
 	
 	return output_string
 
@@ -172,13 +202,12 @@ if __name__ == "__main__":
 		user_names = f.read().split("\n")
   
 	with open("regions_to_include.txt") as f:
-		regions_to_include = f.read().split("\n")
-	
+		regions_to_include = f.read().split("\n")	
 
 	print (f"Generating munro walks for walkhighlands users: {', '.join(user_names)}")
-	print (f"Generating walks in the following regions: {','.join(regions_to_include)}")
-	
+	print (f"Only checking munros/walks in the following regions: {','.join(regions_to_include)}")
+	output_string = generate_walk_list(user_names, regions_to_include)
 	with open("output.txt", "w", encoding="utf-8") as out_file:
-		out_file.write(generate_walk_list(user_names, regions_to_include))
+		out_file.write(output_string)
 
 	print ("Outstanding munro list and best matched walk info written to output.txt")
