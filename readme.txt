@@ -1,3 +1,5 @@
+This repo scrapes walk highlands to find the best walks for a given set of users in a given set of regions to maximise munros bagged and pure enjoyment.
+
 Needs python3 and pip3
 
 In command line run `pip3 install requirements.txt` to install libs
