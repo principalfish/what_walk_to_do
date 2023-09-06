@@ -13,7 +13,7 @@ def walkhighlands_munros_url(id):
 	return f"https://www.walkhighlands.co.uk/Forum/memberlist.php?u={id}&mode=viewmap"
 
 def get_munro_map_from_blog(blog_url):
-	response = requests.get(blog_url)
+	response = requests.get(blog_url, verify=False)
 
 	soup = BeautifulSoup(response.text, 'lxml')
 	response.close()
@@ -31,7 +31,7 @@ def get_munro_map_from_blog(blog_url):
 
 def generate_outstanding_munros(munros_url, munros_to_include):
 
-	response = requests.get(munros_url)
+	response = requests.get(munros_url, verify=False)
 
 	# Create a Beautiful Soup object
 	soup = BeautifulSoup(response.text, "html.parser")
