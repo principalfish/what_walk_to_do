@@ -1,12 +1,12 @@
 The code in this repo scrapes walk highlands to find the best walks for a given set of users in a given set of regions to maximise munros bagged and emjoyment had.
 The code quality is abysmal, please don't judge.
 
-Walks are scored as average munro rating (walk highlands) * average number of new munros per user 
+Walks are scored as (average munro rating (walk highlands))^2 * sqrt(average new munros per user)
 If you wish to change this scoring system change 
 ``` 
 avg_rating = total_rating / len(walk_data["munros"])
-avg_num_users_not_done = total_num_users_not_done / (num_users)
-walk_score = avg_rating * avg_num_users_not_done
+average_new_munros_per_user = total_new_munros / num_users
+walk_score = math.pow(avg_rating, 2) * math.sqrt(average_new_munros_per_user)
 ```
 in generate_walk_list()
 
